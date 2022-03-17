@@ -50,87 +50,103 @@
       }
       });
 
-    // map.addSource('2016-2021-shootings', {
-    // type: 'geojson',
-    // // Use a URL for the value for the `data` property.
-    // data: './data/2016-2021-shootings.geojson'
-    // });
+      map.addLayer({
+        id: 'nypdpp-scounts-line',
+        type: 'line',
+        source: 'nypdpp-scounts',
+        paint: {
+          'line-color': '#6a7280',
+          'line-width': .5,
+        },
+      });
 
-
-
-    // map.addLayer({
-    // 'id': 'nypdpp-scounts-line',
-    // 'type': 'line',
-    // 'source': 'nypdpp-scounts',
-    // 'paint': {
-    //   'line-color': '#1f1d1d'
-    // }
-    // });
-
-    // map.setPaintProperty('nypdpp-scounts-fill', 'fill-color', [
-    //   'match',
-    //   ['get', 'precinct'],
-    //   '1', '#97a1f0',
-    //   '5', '#dba29a',
-    //   'Manhattan', '#b2edc2',
-    //   'Queens', '#deb2ed',
-    //   'Staten Island', '#f2efd0',
-    //   '#ede3e1'
-    // ]);
+      // create legend
+      var stateLegendEl = document.getElementById('state-legend');
+      map.on('zoom', () => {
+      stateLegendEl.style.display = 'none';
+      stateLegendEl.style.display = 'block';
+    });
 
     // When a click event occurs on a feature in the nta-map-fill,
     // open a popup at the location of the click, with nta name
     // HTML from the click event's properties.
-    map.on('click', 'nta-map-fill', function(e) {
-    new mapboxgl.Popup()
-    .setLngLat(e.lngLat)
-    .setHTML(e.features[0].properties.ntaname)
-    .addTo(map);
-  });
+  //   map.on('click', 'nypdpp-scounts-fill', function(e) {
+  //   new mapboxgl.Popup()
+  //   .setLngLat(e.lngLat)
+  //   .setHTML(e.features[0].properties.ntaname)
+  //   .addTo(map);
+  // });
+  //
+  //   // Change the cursor to a pointer when
+  //   // the mouse is over the nta-map-fill.
+  //   map.on('mouseenter', 'nta-map-fill', function() {
+  //   map.getCanvas().style.cursor = 'pointer';
+  // });
+  //
+  //   // Change the cursor back to a pointer
+  //   // when it leaves the nta-map-fill.
+  //   map.on('mouseleave', 'nta-map-fill', function() {
+  //   map.getCanvas().style.cursor = '';
+  // });
+  //
+  //
+  //   // Create a popup.
+  //   const popup = new mapboxgl.Popup({
+  //     closeButton: false,
+  //     closeOnClick: false
+  //   });
+  //
+  //   map.on('mouseenter', 'robberymap-circle', function(e) {
+  //     // Change the cursor style as a UI indicator.
+  //     map.getCanvas().style.cursor = 'pointer';
+  //
+  //     // Copy coordinates array.
+  //     const coordinates = e.features[0].geometry.coordinates.slice();
+  //     const robType = e.features[0].properties.PD_DESC;
+  //     const precinct = e.features[0].properties.ADDR_PCT_CD;
+  //
+  //     // Ensure that if the map is zoomed out such that multiple
+  //     // copies of the feature are visible, the popup appears
+  //     // over the copy being pointed to.
+  //     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+  //     coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+  //     }
+  //
+  //   // Populate the popup and set its coordinates
+  //   // based on the feature found.
+  //       popup.setLngLat(coordinates).setHTML(`${precinct}`).addTo(map);
+  //   });
+  //
+  //       map.on('mouseleave', 'robberymap-circle', function() {
+  //       map.getCanvas().style.cursor = '';
+  //       popup.remove();
+  //     });
 
-    // Change the cursor to a pointer when
-    // the mouse is over the nta-map-fill.
-    map.on('mouseenter', 'nta-map-fill', function() {
-    map.getCanvas().style.cursor = 'pointer';
-  });
-
-    // Change the cursor back to a pointer
-    // when it leaves the nta-map-fill.
-    map.on('mouseleave', 'nta-map-fill', function() {
-    map.getCanvas().style.cursor = '';
-  });
-
-
-    // Create a popup.
-    const popup = new mapboxgl.Popup({
-      closeButton: false,
-      closeOnClick: false
-    });
-
-    map.on('mouseenter', 'robberymap-circle', function(e) {
-      // Change the cursor style as a UI indicator.
-      map.getCanvas().style.cursor = 'pointer';
-
-      // Copy coordinates array.
-      const coordinates = e.features[0].geometry.coordinates.slice();
-      const robType = e.features[0].properties.PD_DESC;
-      const precinct = e.features[0].properties.ADDR_PCT_CD;
-
-      // Ensure that if the map is zoomed out such that multiple
-      // copies of the feature are visible, the popup appears
-      // over the copy being pointed to.
-      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-      }
-
-    // Populate the popup and set its coordinates
-    // based on the feature found.
-        popup.setLngLat(coordinates).setHTML(`${precinct}`).addTo(map);
-    });
-
-        map.on('mouseleave', 'robberymap-circle', function() {
-        map.getCanvas().style.cursor = '';
-        popup.remove();
-      });
+// WILL HAVE TO USE THIS FOR TOGGLING B/W LAYERS
+//   $('#fly-to-midtown').on('click', function() {
+//   // when this is clicked, let's fly the map to Midtown Manhattan
+//   map.flyTo({
+//     center: [-73.983102, 40.757933],
+//     zoom: 12
+//   })
+// })
+//
+// $('#fly-to-jfk').on('click', function() {
+//   // when this is clicked, let's fly the map to Midtown Manhattan
+//   map.flyTo({
+//     center: [-73.784021,40.645230],
+//     zoom: 13
+//   })
+// })
+//
+// $('#toggle-population').on('click', function() {
+//   var visibility = map.getLayoutProperty('community-districts-fill', 'visibility')
+//   if (visibility === 'none') {
+//     map.setLayoutProperty('community-districts-fill', 'visibility', 'visible');
+//   } else {
+//     map.setLayoutProperty('community-districts-fill', 'visibility', 'none');
+//   }
+// })
+// })
 
 });

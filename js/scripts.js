@@ -14,27 +14,41 @@
 
   map.on('load', function() {
     map.addSource('nypdpp-scounts', {
-    type: 'geojson',
-    // Use a URL for the value for the `data` property.
-    data: './data/nypdpp-scounts.geojson', })
+      type: 'geojson',
+      // Use a URL for the value for the `data` property.
+      data: './data/nypdpp-scounts.geojson'
+    })
 
-      // define layer names
-    const layer = [
-    '0-10',
-    '10-20',
-    '20-50',
-    '50-100',
-    '100-200',
-    '200-500',
-    ];
-    const colors = [
-    '#FFEDA0',
-    '#FED976',
-    '#FEB24C',
-    '#FD8D3C',
-    '#FC4E2A',
-    '#E31A1C',
-    ];
+    map.addLayer({
+      id: 'nypdpp-scounts-fill',
+      type: 'fill',
+      source: 'nypdpp-scounts',
+      paint: {
+        'fill-color': [
+          'interpolate',
+          ['linear'],
+          ['get', 'count_vals'],
+          0,
+          '#fff7fb',
+          10,
+          '#ece7f2',
+          20,
+          '#d0d1e6',
+          30,
+          '#a6bddb',
+          40,
+          '#74a9cf',
+          50,
+          '#3690c0',
+          60,
+          '#0570b0',
+          70,
+          '#045a8d',
+          80,
+          '#023858'
+        ],
+      }
+      });
 
     // map.addSource('2016-2021-shootings', {
     // type: 'geojson',
@@ -42,35 +56,27 @@
     // data: './data/2016-2021-shootings.geojson'
     // });
 
-    map.addLayer({
-    'id': 'nypdpp-scounts-fill',
-    'type': 'fill',
-    'source': 'nypdpp-scounts',
-    'paint': {
-      'fill-opacity': .5,
-      'fill-outline-color': '#1f1d1d',
-    }
-    });
 
-    map.addLayer({
-    'id': 'nypdpp-scounts-line',
-    'type': 'line',
-    'source': 'nypdpp-scounts',
-    'paint': {
-      'line-color': '#1f1d1d'
-    }
-    });
 
-    map.setPaintProperty('nypdpp-scounts-fill', 'fill-color', [
-      'match',
-      ['get', 'precinct'],
-      '1', '#97a1f0',
-      '5', '#dba29a',
-      'Manhattan', '#b2edc2',
-      'Queens', '#deb2ed',
-      'Staten Island', '#f2efd0',
-      '#ede3e1'
-    ]);
+    // map.addLayer({
+    // 'id': 'nypdpp-scounts-line',
+    // 'type': 'line',
+    // 'source': 'nypdpp-scounts',
+    // 'paint': {
+    //   'line-color': '#1f1d1d'
+    // }
+    // });
+
+    // map.setPaintProperty('nypdpp-scounts-fill', 'fill-color', [
+    //   'match',
+    //   ['get', 'precinct'],
+    //   '1', '#97a1f0',
+    //   '5', '#dba29a',
+    //   'Manhattan', '#b2edc2',
+    //   'Queens', '#deb2ed',
+    //   'Staten Island', '#f2efd0',
+    //   '#ede3e1'
+    // ]);
 
     // When a click event occurs on a feature in the nta-map-fill,
     // open a popup at the location of the click, with nta name
@@ -94,16 +100,6 @@
     map.getCanvas().style.cursor = '';
   });
 
-    // map.addLayer({
-    // 'id': 'robberymap-circle',
-    // 'type': 'circle',
-    // 'source': 'robberymap',
-    // 'paint': {
-    //   'circle-color': '#f2d0d5',
-    //   'circle-radius': 2,
-    //   'circle-opacity': 0.5
-    // }
-    // });
 
     // Create a popup.
     const popup = new mapboxgl.Popup({

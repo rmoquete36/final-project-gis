@@ -65,8 +65,8 @@
           <p>PLACE HOLDER #2.</p>
           <h5>Switch between shooting incidents and Census data for the neighborhoods</h5>
           <div class="btn-group nabe-buttons" role="group" aria-label="Basic outlined example">
-            <button type="button" class="btn btn-outline-primary flyto flyto-the-village">Shootings</button>
-            <button type="button" class="btn btn-outline-primary flyto flyto-fidi">Census Data</button>
+            <button class="button-10" id='toggle-shootings' role="button">Toggle Shootings Layer</button>
+            <button class="button-10" id='toggle-census-data' role="button">Toggle Census Data Layer</button>
           </div>
           <div class='reset'><small>Back to City View</small></div>
           <div class="alert alert-primary" role="alert">
@@ -81,7 +81,7 @@
       <!-- this is where mapboxGL will insert the map -->
       </div>
 
-<!-- testing legend -->
+<!-- legend -->
       <div id="shooting-legend" class="legend">
       <h4>Shooting Incidents</h4>
       <div><span style="background-color: #023858"></span>80</div>
@@ -94,7 +94,7 @@
       <div><span style="background-color: #ece7f2"></span>10</div>
       <div><span style="background-color: #fff7fb"></span>0</div>
       </div>
-  <!--end of testing legend  -->
+  <!--legend  -->
 
     </div>
     <!-- Modal -->

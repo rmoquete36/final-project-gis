@@ -49,7 +49,8 @@
         80,
         '#023858'
       ],
-    'fill-outline-color': '#6a7280'
+    'fill-outline-color': '#171515'
+    // alternate outline color: #6a7280
     }
     });
 
@@ -64,22 +65,11 @@
     type: 'fill',
     source: 'census-08-12',
     paint: {
-    'fill-opacity': .5,
+    'fill-opacity': .95,
     'fill-outline-color': '#f5eeed',
-    'fill-color': '#f5eeed'
+    'fill-color': '#8994a1'
   }
   });
-
-// style these lines differently - MAY NOT NEED THIS PIECE OF CODE
-  // map.addLayer({
-  //   id: 'census-08-12-line',
-  //   type: 'line',
-  //   source: 'census-08-12',
-  //   paint: {
-  //   'line-color': '#1f1d1d'
-  // }
-  // });
-
 
     // create legend
     var shootingLegendEl = document.getElementById('shooting-legend');
@@ -113,9 +103,34 @@
   map.on('click', 'census-08-12-fill', function(e) {
     new mapboxgl.Popup()
     .setLngLat(e.lngLat)
-    .setHTML(e.features[0].properties.ntaname)
+    // .setHTML(e.features[0].properties.ntaname) - original code; (`<p>${e.features[0].properties.ntaname}</p>${e.features[0].properties.popunemplo}`)
+    .setHTML(`
+      <strong>Neighborhood:</strong> ${e.features[0].properties.ntaname}
+      <li><strong>Total Population:</strong> ${e.features[0].properties.poptot}</li>
+      <li><strong>Population Unemployed:</strong> ${e.features[0].properties.popunemplo}</li>
+      <li><strong>Population Poor/Struggling:</strong> ${e.features[0].properties.poororstru}</li>
+      <li><strong>Residents on Public Assistance:</strong> ${e.features[0].properties.withpubass}</li>
+      `)
+    // .setHTML(popupContent)
     .addTo(map);
-});
+  // popup.setLngLat(coordinates).setHTML(popupContent).addTo(map);
+   });
+
+
+// pull these properties from data for popup
+    // const coordinates = e.features[0].geometry.coordinates.slice();
+    // const neighborhood = e.features[0].properties.ntaname;
+    // const population = e.features[0].properties.poptot;
+    // const unemployed = e.features[0].properties.popunemplo;
+    // const poor = e.features[0].properties.poororstru;
+    //
+    // var popupContent = `
+    //   <h3>${neighborhood}</h3>
+    //   <ul>
+    //     <li><strong>Unemployed:</strong> ${unemployed}</li>
+    //     <li><strong>Poor or Struggling:</strong> ${poor}</li>
+    //     <li><strong>Total Population:</strong> ${population}</li>
+    // `
 
 
   // listen for click on the 'Back to City View' button
@@ -184,6 +199,15 @@
   //       popup.remove();
   //     });
 
+  // style these lines differently - MAY NOT NEED THIS PIECE OF CODE
+    // map.addLayer({
+    //   id: 'census-08-12-line',
+    //   type: 'line',
+    //   source: 'census-08-12',
+    //   paint: {
+    //   'line-color': '#1f1d1d'
+    // }
+    // });
 
 
 

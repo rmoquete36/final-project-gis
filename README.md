@@ -6,4 +6,4 @@
  This map reflects aggregate counts of shooting incidents in New York City between 2015 and 2020, by precinct. I further provide socioeconomic census data for all NTAs in the City.
  
  <h2>Screenshot</h2>
-<img width="1388" alt="Screen Shot 2022-03-29 at 7 30 54 PM" src="https://user-images.githubusercontent.com/98977363/160723120-a1df3e95-fd34-491b-8178-2a20206ed6cb.png">
+<img width="1390" alt="Screen Shot 2022-03-29 at 9 29 36 PM" src="https://user-images.githubusercontent.com/98977363/160732763-c8955f3b-eda3-4eea-aa9c-eafcfca319d6.png">

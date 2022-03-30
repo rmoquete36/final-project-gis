@@ -46,7 +46,13 @@
             70,
             '#045a8d',
             80,
-            '#023858'
+            '#023858',
+            90,
+            '#101e52',
+            100,
+            '#0a1642',
+            110,
+            '#030f38'
           ],
     'fill-outline-color': '#171515'
       }
@@ -93,6 +99,15 @@
       map.setLayoutProperty('census-08-12-fill', 'visibility', 'none');
     }
   })
+
+  map.on('click', 'nypdpp-scounts-fill', function(e) {
+    new mapboxgl.Popup()
+    .setLngLat(e.lngLat)
+    // .setHTML(e.features[0].properties.ntaname) - original code; (`<p>${e.features[0].properties.ntaname}</p>${e.features[0].properties.popunemplo}`)
+    .setHTML(`<strong>Number of Shooting Incidents:</strong> ${e.features[0].properties.count_vals}
+              <strong>Precinct:</strong> ${e.features[0].properties.precinct}`)
+    .addTo(map);
+   });
 
 
   // When a click event occurs on a feature in the nta-map-fill,

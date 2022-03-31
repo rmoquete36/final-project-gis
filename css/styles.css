@@ -54,14 +54,14 @@ html, body {
 
 /* override bootstrap styles for primary outline buttons */
 .btn-outline-primary {
-  color: #FFF;
-  border-color: #FFF;
+  color: #023858;
+  border-color: #023858;
 }
 
 .btn-outline-primary:hover {
-  color: #333;
-  background-color: #ccc;
-  border-color: #ccc;
+  color: #023858;
+  background-color: #023858;
+  border-color: #023858;
 }
 
 /* style the "brand" or logo area */
